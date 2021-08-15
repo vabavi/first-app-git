@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ساخت پرسشنامه | روانشناسی</title>
+    <link rel="stylesheet" href="css/all.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+    <main id="app" class="base-page">
+        <div class="contaner form-specifications" v-if="ok">
+            <div class="page1">
+                <p><span>به نام خدا</span></p>
+                <p>پرسشنامه افسردگی سما</p>
+                <span>(سنجش میزان افسردگی)</span>
+            </div>
+            <div class="discriptionStart">
+                <ul class="list-discriptionStart">
+                    <li v-for="item in discriptionStart">
+                        <i class="fa fa-check-square"></i>
+                        <span>{{item}}</span>
+
+                    </li>
+                </ul>
+
+            </div>
+            <div>
+                <input class="startApp" id="start" type="button" value="شروع آزمون" v-on:click="showAndHiddenElement">
+            </div>
+        </div>
+
+
+        <div v-if="isFalse">
+            <div class="box-questions" v-show="contaner<=29">
+                <form v-for='(item,index) in opjQuestion'>
+                    <div class="form-question" id="question" v-show="index===contaner">
+
+                        <div class="box-question"> {{item.question}}</div>
+                        <div id="options">
+                            <label v-for="ans in item.answer">
+                                <br>
+                                <br>
+                                <input type="radio" name="ans">
+                                {{ans}}
+                            </label>
+                        </div>
+
+                    </div>
+
+                </form>
+                <div class="input-control">
+                    <button class="input-prev" v-bind:disabled="contaner<=0" v-on:click="prev">
+                        سوال قبل
+                    </button>
+
+                    <button id="myBtn" class="iput-next" v-on:click="next">
+                        سوال بعدی
+                    </button>
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <div class="result-test" v-show="contaner===30">
+            <p class="result">شما ازمون را به درستی انجام دادید برای دیدن نتیجه کلیک کنید</p>
+            <button id="inputResult" class="iput-result" type="button" v-on:click="testapp">مشاهدهتفسیر</button>
+
+        </div>
+
+    </main>
+    <!-- modal -->
+    <div class="modal" id="myModal">
+        <div class="modal-content">
+            <div class="warning-icon">
+                <span class="incon-text">!</span>
+            </div>
+            <div>
+                <p>سوال بدون جواب</p>
+            </div>
+            <div>
+                <h1>پاسخ به سوال اجباری است</h1>
+            </div>
+            <div>
+                <button class="btn-confirm " id="btnModal">متوجه شدم</button>
+            </div>
+        </div>
+
+    </div>
+    <script src="vue.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
